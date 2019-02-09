@@ -1,5 +1,9 @@
 .idea
 .DS_Store
+.ipynb_checkpoints/
+
+# notebook for testing
+tests.ipynb
 
 # kitty segmentation dataset
 segmentation/kitty/data_semantics
