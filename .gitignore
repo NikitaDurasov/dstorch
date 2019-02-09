@@ -1,1 +1,5 @@
 .idea
+.DS_Store
+
+# kitty segmentation dataset
+segmentation/kitty/data_semantics
