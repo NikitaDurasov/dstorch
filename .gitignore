@@ -1,6 +1,7 @@
 .idea
 .DS_Store
 .ipynb_checkpoints/
+*.pyc
 
 # notebook for testing
 tests.ipynb
