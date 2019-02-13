@@ -7,7 +7,7 @@ module_path = os.path.dirname(os.path.realpath(__file__))
 
 class SegmentationBase(Dataset):
 
-    def __init__(self, data_path, transform, split):
+    def __init__(self, data_path, split, transform=None):
         self.data_path = data_path
         self.transform = transform
         self.split = split
@@ -26,7 +26,10 @@ class SegmentationBase(Dataset):
         image = self.load_image(image_name)
         mask = self.load_segmentation(mask_name)
 
-        sample = {"image": image, "mask": mask}
+        if mask is not None:
+            sample = {"image": image, "mask": mask}
+        else:
+            sample = {"image": image}
 
         if self.transform:
             sample = self.transform(**sample)
