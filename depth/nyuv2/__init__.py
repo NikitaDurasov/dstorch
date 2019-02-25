@@ -11,7 +11,7 @@ class NYUv2Depth(depth_utils.DepthHDF5):
 		return ["image", "depth"]
 
 	def name(self):
-		return "nuyv2"
+		return "nyuv2"
 
 	def process_data(self, sample):
 		sample['image'] = sample['image'].swapaxes(0, 2)

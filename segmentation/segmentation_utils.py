@@ -1,5 +1,6 @@
 from torch.utils.data import Dataset
 from abc import abstractmethod
+from .. import dataset_utils
 import h5py
 import os
 
@@ -60,7 +61,6 @@ class SegmentationBase(Dataset):
 
         return image, mask
 
-    @abstractmethod
     def generate_split(self):
 
         if self.split == "train":
@@ -78,7 +78,7 @@ class SegmentationBase(Dataset):
             split_file = open(split_path)
             return list(map(self.line_to_filepaths, split_file.readlines()))
 
-class SegmentationHDF5(Dataset):
+class SegmentationHDF5(dataset_utils.HDF5Dataset):
 
     def base_path(self):
         return module_path

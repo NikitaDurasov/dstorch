@@ -54,7 +54,6 @@ class HDF5Dataset(Dataset):
 
         return sample
 
-    @abstractmethod
     def generate_split(self):
 
         if self.split == 'train':
