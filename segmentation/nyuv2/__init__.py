@@ -11,7 +11,7 @@ class NYUv2Segmentation(segmentation_utils.SegmentationHDF5):
 		return ["image", "mask"]
 
 	def name(self):
-		return "nyuv2"
+		return "nuyv2"
 
 	def process_data(self, sample):
 		sample['image'] = sample['image'].swapaxes(0, 2)
