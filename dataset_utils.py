@@ -3,6 +3,64 @@ from abc import abstractmethod
 import h5py
 import os
 
+class DatasetBase(Dataset):
+
+    def __init__(self, data_path, split, transform=None):
+        self.data_path = data_path
+        self.transform = transform
+        self.split = split
+
+        self.data_files = self.generate_split()
+        self.load_functions = self.generate_load_functions()
+
+    def __len__(self):
+        return len(self.data_files)
+
+    @abstractmethod
+    def name(self):
+        pass
+
+    @abstractmethod
+    def generate_load_functions(self):
+        pass
+
+    def line_to_filepaths(self, line):
+        line = line.rstrip()
+        file_names = line.split("\t")
+
+        sample_files = []
+
+        for name in file_names:
+            split_name = name.split(" ")
+
+            if split_name[0] == "-":
+                sample_files.append("-")
+            else:
+                sample_files.append(os.path.join(*([self.data_path] + split_name)))
+
+        return sample_files
+
+    @abstractmethod
+    def base_path(self):
+        pass
+
+    def generate_split(self):
+
+        if self.split == "train":
+            split_path = os.path.join(self.base_path(), "splits", self.name() + "_train_split.txt")
+            split_file = open(split_path)
+            return list(map(self.line_to_filepaths, split_file.readlines()))
+
+        elif self.split == "valid":
+            split_path = os.path.join(self.base_path(), "splits", self.name() + "_val_split.txt")
+            split_file = open(split_path)
+            return list(map(self.line_to_filepaths, split_file.readlines()))
+
+        elif self.split == "test":
+            split_path = os.path.join(self.base_path(), "splits", self.name() + "_test_split.txt")
+            split_file = open(split_path)
+            return list(map(self.line_to_filepaths, split_file.readlines()))
+
 class HDF5Dataset(Dataset):
 
     def __init__(self, hdf5_path, split, transform=None):
