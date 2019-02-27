@@ -60,7 +60,6 @@ class SegmentationBase(Dataset):
 
         return image, mask
 
-    @abstractmethod
     def generate_split(self):
 
         if self.split == "train":
