@@ -24,6 +24,18 @@ class DatasetBase(Dataset):
     def generate_load_functions(self):
         pass
 
+    def keys(self):
+        pass
+
+    def __getitem__(self, index):
+        sample = self.data_files[index]
+        sample = {key: load(filename) for load, filename, key in zip(self.load_functions, sample, self.keys())}
+
+        if self.transform:
+            sample = self.transform(**sample)
+
+        return sample
+
     def line_to_filepaths(self, line):
         line = line.rstrip()
         file_names = line.split("\t")
@@ -40,6 +52,7 @@ class DatasetBase(Dataset):
 
         return sample_files
 
+    # TODO GET RID OF THIS 
     @abstractmethod
     def base_path(self):
         pass
@@ -94,6 +107,7 @@ class HDF5Dataset(Dataset):
     def name(self):
         pass
 
+    # TODO GET RID OF THIS 
     @abstractmethod
     def base_path(self):
         pass
@@ -112,7 +126,6 @@ class HDF5Dataset(Dataset):
 
         return sample
 
-    @abstractmethod
     def generate_split(self):
 
         if self.split == 'train':
