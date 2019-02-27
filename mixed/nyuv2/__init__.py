@@ -9,7 +9,7 @@ class NYUv2DepthAndSegmentation(dataset_utils.HDF5Dataset):
         return ["image", "mask", "depths"]
 
     def name(self):
-        return "nuyv2"
+        return "nyuv2"
 
     def process_data(self, sample):
         sample['image'] = sample['image'].swapaxes(0, 2)
