@@ -8,6 +8,7 @@ class NYUv2DepthAndSegmentation(dataset_utils.HDF5Dataset):
     def generate_new_keys(self):
         return ["image", "mask", "depths"]
 
+
     def name(self):
         return "nyuv2"
 

@@ -1,1 +1,1 @@
-from . import nuyv2
+from . import nyuv2

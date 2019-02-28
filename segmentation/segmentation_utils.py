@@ -4,8 +4,6 @@ from .. import dataset_utils
 import h5py
 import os
 
-
-
 module_path = os.path.dirname(os.path.realpath(__file__))
 
 class SegmentationBase(dataset_utils.DatasetBase):
