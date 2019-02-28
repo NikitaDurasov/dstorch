@@ -36,3 +36,15 @@ plt.imshow(image)
 plt.imshow(mask)
 ```
 ![alt text](https://lh3.googleusercontent.com/i7IIii_Ji2is9B0-QO2RN4uIOSjCFtVDI9svr8Nk-4BM2vgVS2T80Dt6VzKVTdPeuTxMuKM6E0xlgCb2dO5ay4QPlSdCDLMYtEON7Sh2NNJTz4RMsEra1KJIVMmKFTNo-dj4MmgEQDaobKKTCP0bblutP49xk4xeh-53qen3nO5Lb__txzfsg2ijo-eY_Ytw4cvqILYK3n6Y3XGXiYjUEDuLNGpPKjxkhU0jkoUFC9ouD2It31C6UbweR3QV6I2onoe74EpNTkZczFOK8aURwHwjDflPX8_SwWpeL_TSNaMQKRr79833CLV9Y2fzOAogLZ93n7z-Vmqj-ef2vMjoEmKog2821O8tNLPoFGrOLJUUGQOiZRtAUtTu8yLN68cnbKXJkqLihq7ur4eg6bPVba4cUfTJaC0fXX8_Ur76QS4-MDeRSvh4FIp0J5p7WE99Rylbb_DZaTlWhrk9P0bMjWVRzAlpcO8pMf83N5ibqNHFYN6JAZQo2TREFigPnNIX2b_eGnBGo8VGcaK3Y6y3WzyDQtLJsAmmnTy3sCTPs1EN_54jsFhONel3VPfkLnVl_QjztgKMlM1dYsOnqjzKyxfVOs55rDKq19Qy6jtlj90Ec62sa3XWCvPU_rQDpMzGdVHgVJngZ6yLQ1z6w0xxmICr3xncAOo=w426-h216-no)
+
+## Datasets
+Currently available:
+### Segmentation:
+* Cityscapes
+* KITTY
+* NYU v.2
+* Pascal VOC 2012
+
+### Depth
+* KITTY
+* NYU v.2
