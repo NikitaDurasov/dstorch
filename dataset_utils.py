@@ -142,3 +142,7 @@ class HDF5Dataset(Dataset):
             indexes_path = os.path.join(self.base_path(), "splits", self.name() + "_test_split.txt")
             indexes_file = open(indexes_path)
             return list(map(int, indexes_file.readlines()))
+
+class DatasetsPool(Dataset):
+    # future class with ability to merge other datasets in one 
+    pass 
