@@ -10,7 +10,7 @@
 For the most datasets usage is rather straightforward: 
 * download dataset data
 * place all this data in one directory
-* pass it the path to directory to class in constructor
+* pass this directory path in constructor
 
 For example let's try it with Cityscapes segmentation dataset:
 1) visit [cityscapes dataset site](https://www.cityscapes-dataset.com/downloads/) and download **gtFine_trainvaltest.zip** and **leftImg8bit_trainvaltest.zip**
@@ -34,6 +34,19 @@ plt.imshow(mask, alpha=0.9)
 ```
 ![alt text](https://www.cityscapes-dataset.com/wordpress/wp-content/uploads/2015/07/stuttgart03.png)
 
+There is also another type of datasets implemented as hdf5 storages, e.g. NYU v.2 dataset. For this type of datasets you only need to pass path to hdf5/mat file with data and that's it. 
+
+Let's try that with NYU: 
+1) download **Labeled dataset** from [site](https://cs.nyu.edu/~silberman/datasets/nyu_depth_v2.html), now you have file named **nyu_depth_v2_labeled.mat**
+2) import package and pass path to data
+```python 
+from dstorch.segmentation import nyuv2
+
+dataset = nyuv2.NYUv2Segmentation('../datasets/NYUv2/nyu_depth_v2_labeled.mat', 'train')
+
+sample = dataset[0]
+image, mask = sample['image'], sample['mask']
+```
 
 ## Datasets
 Currently available:
@@ -41,8 +54,12 @@ Currently available:
 * Cityscapes
 * KITTY
 * NYU v.2
-* Pascal VOC 2012
+* Pascal VOC 2012 (without test)
 
 ### Depth
-* KITTY
+* KITTY (without train)
 * NYU v.2
+
+### On the way
+* Make3D depth dataset
+* detections datasets
