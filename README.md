@@ -48,6 +48,15 @@ sample = dataset[0]
 image, mask = sample['image'], sample['mask']
 ```
 
+## Tutorials
+
+For detailed datasets tutorials open [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/NikitaDurasov/dstorch/blob/dev/tutorials.ipynb)
+
+Currently available:
+### Segmentation
+### Depth
+### Mixed
+
 ## Datasets
 Currently available:
 ### Segmentation:
