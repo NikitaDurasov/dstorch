@@ -6,11 +6,15 @@ class NYUv2DepthAndSegmentation(dataset_utils.HDF5Dataset):
         return ["images", "labels", "depths"]
 
     def generate_new_keys(self):
-        return ["image", "mask", "depths"]
+        return ["image", "mask", "depth"]
 
 
     def name(self):
         return "nyuv2"
+
+    # TODO doesn't work without this path
+    def base_path(self):
+        pass
 
     def process_data(self, sample):
         sample['image'] = sample['image'].swapaxes(0, 2)

@@ -6,5 +6,8 @@
 # notebook for testing
 tests.ipynb
 
+# but not tutorials
+!tutorials.ipynb
+
 # kitty segmentation dataset
 segmentation/kitty/data_semantics
