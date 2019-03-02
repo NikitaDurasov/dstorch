@@ -3,6 +3,10 @@ from abc import abstractmethod
 import h5py
 import os
 
+home_dir = os.path.expanduser("~")
+splits_dir = os.path.join(home_dir, ".dstorch_splits")
+
+
 class DatasetBase(Dataset):
 
     def __init__(self, data_path, split, transform=None):
@@ -52,7 +56,6 @@ class DatasetBase(Dataset):
 
         return sample_files
 
-    # TODO GET RID OF THIS 
     @abstractmethod
     def base_path(self):
         pass
@@ -60,19 +63,20 @@ class DatasetBase(Dataset):
     def generate_split(self):
 
         if self.split == "train":
-            split_path = os.path.join(self.base_path(), "splits", self.name() + "_train_split.txt")
+            split_path = os.path.join(splits_dir, self.base_path(), self.name() + "_train_split.txt")
             split_file = open(split_path)
             return list(map(self.line_to_filepaths, split_file.readlines()))
 
         elif self.split == "valid":
-            split_path = os.path.join(self.base_path(), "splits", self.name() + "_val_split.txt")
+            split_path = os.path.join(splits_dir, self.base_path(), self.name() + "_val_split.txt")
             split_file = open(split_path)
             return list(map(self.line_to_filepaths, split_file.readlines()))
 
         elif self.split == "test":
-            split_path = os.path.join(self.base_path(), "splits", self.name() + "_test_split.txt")
+            split_path = os.path.join(splits_dir, self.base_path(), self.name() + "_test_split.txt")
             split_file = open(split_path)
             return list(map(self.line_to_filepaths, split_file.readlines()))
+
 
 class HDF5Dataset(Dataset):
 
@@ -107,7 +111,6 @@ class HDF5Dataset(Dataset):
     def name(self):
         pass
 
-    # TODO GET RID OF THIS 
     @abstractmethod
     def base_path(self):
         pass
@@ -129,20 +132,22 @@ class HDF5Dataset(Dataset):
     def generate_split(self):
 
         if self.split == 'train':
-            indexes_path = os.path.join(self.base_path(), "splits", self.name() + "_train_split.txt")
+            indexes_path = os.path.join(splits_dir, self.base_path(), self.name() + "_train_split.txt")
             indexes_file = open(indexes_path)
             return list(map(int, indexes_file.readlines()))
 
         if self.split == 'valid':
-            indexes_path = os.path.join(self.base_path(), "splits", self.name() + "_val_split.txt")
+            indexes_path = os.path.join(splits_dir, self.base_path(), self.name() + "_val_split.txt")
             indexes_file = open(indexes_path)
             return list(map(int, indexes_file.readlines()))
 
         if self.split == 'test':
-            indexes_path = os.path.join(self.base_path(), "splits", self.name() + "_test_split.txt")
+            indexes_path = os.path.join(splits_dir, self.base_path(), self.name() + "_test_split.txt")
             indexes_file = open(indexes_path)
             return list(map(int, indexes_file.readlines()))
 
+
+# TODO implement
 class DatasetsPool(Dataset):
     # future class with ability to merge other datasets in one 
     pass 

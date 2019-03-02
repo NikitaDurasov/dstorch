@@ -4,7 +4,14 @@ from . import mixed
 
 import os 
 import sys
+import zipfile
 
-# TODO unpack splits to dir in home
-if not os.path.isdir("~/.dstorch_splits"):
-	os.mkdir("~/.dstorch_splits")
+# unpack splits to dir in home
+home_dir = os.path.expanduser("~")
+splits_dir = os.path.join(home_dir, ".dstorch_splits")
+if not os.path.isdir(splits_dir):
+    os.makedirs(splits_dir)
+
+zip_ref = zipfile.ZipFile(os.path.join('__data__', 'splits.zip'), 'r')
+zip_ref.extractall(splits_dir)
+zip_ref.close()
