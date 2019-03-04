@@ -2,6 +2,7 @@ from torch.utils.data import Dataset
 from abc import abstractmethod
 import h5py
 import os
+import numpy as np
 
 home_dir = os.path.expanduser("~")
 splits_dir = os.path.join(home_dir, ".dstorch_splits")
@@ -150,4 +151,24 @@ class HDF5Dataset(Dataset):
 # TODO implement
 class DatasetsPool(Dataset):
     # future class with ability to merge other datasets in one 
-    pass 
+    def __init__(self, datasets):
+        self.datasets = [item[0] for item in datasets]
+        self.keys = [item[1] for item in datasets]
+
+        self.borders = np.cumsum([len(dataset) for dataset in self.datasets])
+
+    def __len__(self):
+        return np.sum([len(dataset) for dataset in self.datasets])
+
+    def __getitem__(self, index):
+
+        # TODO could change on binary search
+        if index < self.borders[0]:
+            sample = self.datasets[0][index]
+            return {key: sample[key] for key in self.keys[0]}
+
+        for i, border in enumerate(self.borders):
+            if index < border:
+                real_index = index - self.borders[i - 1]
+                sample = self.datasets[i][real_index]
+                return {key: sample[key] for key in self.keys[i]}
