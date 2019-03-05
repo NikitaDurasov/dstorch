@@ -74,3 +74,4 @@ Currently available:
 
 ### On the way
 * detections datasets
+* text detections datasets (e.g. ICDAR)
