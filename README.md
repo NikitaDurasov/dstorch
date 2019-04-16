@@ -70,7 +70,8 @@ Currently available:
 ### Depth
 * KITTY (without train)
 * NYU v.2
+* Make3D
 
 ### On the way
-* Make3D depth dataset
 * detections datasets
+* text detections datasets (e.g. ICDAR)
