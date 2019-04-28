@@ -10,13 +10,14 @@ splits_dir = os.path.join(home_dir, ".dstorch_splits")
 
 class DatasetBase(Dataset):
 
-    def __init__(self, data_path, split, transform=None):
+    def __init__(self, data_path, split, transform=None, transform_type='args'):
         self.data_path = data_path
         self.transform = transform
         self.split = split
 
         self.data_files = self.generate_split()
         self.load_functions = self.generate_load_functions()
+        self.transform_type = transform_type
 
     def __len__(self):
         return len(self.data_files)
@@ -37,7 +38,10 @@ class DatasetBase(Dataset):
         sample = {key: load(filename) for load, filename, key in zip(self.load_functions, sample, self.keys())}
 
         if self.transform:
-            sample = self.transform(**sample)
+            if self.transform_type == 'args':
+                sample = self.transform(**sample)
+            elif self.transform_type == 'dict':
+                sample = self.transform(sample)
 
         return sample
 
